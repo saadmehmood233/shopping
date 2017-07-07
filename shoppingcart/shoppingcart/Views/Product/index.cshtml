@@ -1,0 +1,41 @@
+﻿@model shoppingcart.Models.CategoriesProducts
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Products";
+}
+<br />
+<div class="row">
+    <div class="col col-sm-3">
+        <h3>Categories</h3>
+        <div class="list-group">
+            <a href="index?category=All" class="list-group-item">All</a>
+            @foreach (var category in Model.categories)
+            {
+                <a href="index?category=@category.name" class="list-group-item">@category.name</a>
+            }
+        </div>
+    </div>
+
+    <div class="col col-sm-9">
+        <div class="hidden-xs">
+            @{Html.RenderPartial("_Carousel");}
+        </div>
+        
+
+        <div class="row product-row">
+            @foreach (var product in Model.products)
+            {
+                <div class="col col-sm-3">
+                    @{Html.RenderPartial("_ProductCard", product);}
+                </div>   
+            }
+        </div>
+        @Html.PagedListPager(Model.products, page => Url.Action("/Index", new
+            {
+                category = Model.activeCategory,
+                page = page
+            }))
+    </div>
+</div>
+

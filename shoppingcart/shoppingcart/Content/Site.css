@@ -16,6 +16,10 @@ textarea {
     max-width: 280px;
 }
 
+.product-row {
+    margin-top: 30px;
+}
+
 /* styles for validation helpers */
 .field-validation-error {
     color: #b94a48;
@@ -39,4 +43,31 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
+}
+
+.product-card {
+    border: 1px solid #ccc;
+}
+
+.product-card > img {
+    width: 250px;
+    height: 200px;
+}
+
+.divider {
+    margin: 10px 0;
+}
+
+.col {
+    margin-bottom: 10px;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-card-btn-group > .btn {
+
 }
