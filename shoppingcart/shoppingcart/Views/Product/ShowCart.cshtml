@@ -1,0 +1,101 @@
+﻿@model List<shoppingcart.Models.Product>
+@{
+    ViewBag.Title = "ShowCart";
+}
+
+<br /><br />
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
+                        </div>
+                        <div class="col-xs-6">
+                            <a href="/" class="btn btn-primary btn-sm btn-block">
+                                <span class="glyphicon glyphicon-share-alt"></span> Continue shopping
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                @if (Model != null)
+                {
+                     foreach (var cartItem in Model)
+                     {
+                        <div class="row cart-row">
+                            <div class="col-xs-2">
+                                <img class="img-responsive cart-img" src="@Url.Content("~/Content/Images/" + cartItem.img_path)">
+                            </div>
+                            <div class="col-xs-4">
+                                <h4 class="product-name"><strong>@cartItem.name</strong></h4><h4><small>@cartItem.description</small></h4>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="col-xs-6 text-right">
+                                    <h6><strong><span class="price">@cartItem.price</span> <span class="text-muted">x</span></strong></h6>
+                                </div>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control input-sm quantity" value="1" >
+                                </div>
+                                <div class="col-xs-2">
+                                    <a href="/Product/RemovefromCart/@cartItem.id" class="btn btn-link btn-xs">
+                                        <span class="glyphicon glyphicon-trash"> </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                }
+                else
+                {
+                    <h1>Cart is Empty.</h1>
+                }
+
+                <div class="row">
+                    <div class="text-center">
+                        <div class="col-xs-9">
+                            <h6 class="text-right">Updated items?</h6>
+                        </div>
+                        <div class="col-xs-3">
+                            <button type="button" onclick="update()" class="btn btn-default btn-sm btn-block">
+                                Update cart
+                            </button>
+                        </div>
+                    </div>
+                </div>    
+            <div class="panel-footer">
+                <div class="row text-center">
+                    <div class="col-xs-9">
+                        <h4 class="text-right">Total <strong><span class="total">0.00</span>  R.s</strong></h4>
+                    </div>
+                    <div class="col-xs-3">
+                        <button type="button" class="btn btn-success btn-block">
+                            Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+        function update () {
+            var sum = 0;
+            $(".cart-row").each(function (index, item) {
+                var price = $(item).find(".price").text();
+                var quantity = $(item).find(".quantity").val();
+                sum += price * quantity;
+            });
+            $(".total").text(sum);
+        };
+        update();
+    </script>
+}

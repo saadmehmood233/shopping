@@ -1,12 +1,12 @@
 ﻿@model shoppingcart.Models.Product
 <div class="product-card">
-    <img src="@Server.MapPath(Url.Content("~/Content/images/" + @Model.img_path))" class="img-responsive" alt="" />
+    <img src="@Url.Content("~/Content/images/" + @Model.img_path)" class="img-responsive" alt="" />
     <div class="product-card-info">
         <p><b>Name  :</b> @Model.name</p>
         <p><b>Price  :</b> @Model.price R.S</p>
     </div>
     <div class="product-card-btn-group">
         <a href="/Product/Detail?id=@Model.id" class="btn btn-sm btn-default">Detail</a>
-        <a href="#" class="btn btn-sm btn-success">Add to Cart</a>
+        <a href="/Product/AddtoCart/@Model.id" class="btn btn-sm btn-success">Add to Cart</a>
     </div>
 </div>

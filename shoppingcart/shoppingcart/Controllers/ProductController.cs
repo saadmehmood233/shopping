@@ -12,7 +12,6 @@ namespace shoppingcart.Controllers
     public class ProductController : Controller
     {
         private shoppingcartEntities db = new shoppingcartEntities();
-        private static List<Product> cart = new List<Product>();
 
         public ActionResult Index(string category = "All", int page = 1, int pageSize = 8)
         {
@@ -43,6 +42,56 @@ namespace shoppingcart.Controllers
             if (product == null)
                 return RedirectToAction("Index");
             return View(product);
+        }
+
+        public ActionResult AddtoCart(int id)
+        {
+            List<Product> cart = Session["cart"] as List<Product>;
+            if (cart == null)
+            {
+                cart = new List<Product>();
+                Session["cart_size"] = cart.Count;
+                Session["cart"] = cart;
+            }
+            Product cartItem = db.Products.Where(x=>x.id == id).FirstOrDefault();
+
+            int index = cart.FindIndex(x => x.id == cartItem.id);
+            if (cartItem != null && index < 0)
+            {
+                cart.Add(cartItem);
+                Session["cart"] = cart;
+                Session["cart_size"] = cart.Count;
+                TempData["message"] = "Item has been added to the cart.";
+            }
+            else
+            {
+                TempData["message"] = "Item already exists in the cart.";
+            }
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public ActionResult RemovefromCart(int id)
+        {
+            List<Product> cart = Session["cart"] as List<Product>;
+            if (cart == null)
+            {
+                cart = new List<Product>();
+                Session["cart_size"] = cart.Count;
+                Session["cart"] = cart;
+            }
+
+            cart.RemoveAll(x => x.id == id);
+            Session["cart"] = cart;
+            Session["cart_size"] = cart.Count;
+
+            TempData["message"] = "Item has been removed from cart.";
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public ActionResult ShowCart()
+        {
+            List<Product> cart = Session["cart"] as List<Product>;
+            return View(cart);
         }
 
 	}

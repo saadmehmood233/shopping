@@ -10,10 +10,9 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+
+.input-sm {
+    width: 25%;
 }
 
 .product-row {
@@ -68,6 +67,7 @@ input[type="checkbox"].input-validation-error {
     align-items: center;
 }
 
-.product-card-btn-group > .btn {
-
+.cart-img{
+    width: 100px;
+    height: 100px;
 }
