@@ -1,0 +1,19 @@
+﻿@model shoppingcart.Models.Product
+@{
+    ViewBag.Title = "Detail";
+}
+
+<div class="row">
+    <div class="col col-sm-3">
+        <img src="@Url.Content("~/Content/images/"+ Model.img_path)" class="detail-img img-responsive" />
+    </div>
+    <div class="col col-sm-9">
+        <h1>@Model.name</h1>
+        <h3>Price: @Model.price R.S</h3>
+        <p>@Model.description</p>
+        <a href="#" class="btn btn-success">Add to Cart</a>
+    </div>
+</div>
+
+
+

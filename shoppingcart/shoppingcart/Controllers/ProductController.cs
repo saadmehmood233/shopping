@@ -12,6 +12,8 @@ namespace shoppingcart.Controllers
     public class ProductController : Controller
     {
         private shoppingcartEntities db = new shoppingcartEntities();
+        private static List<Product> cart = new List<Product>();
+
         public ActionResult Index(string category = "All", int page = 1, int pageSize = 8)
         {
             Category cat = db.Categories.Where(x=>x.name == category).FirstOrDefault();
@@ -34,5 +36,14 @@ namespace shoppingcart.Controllers
 
             return View(model);
         }
+
+        public ActionResult Detail(int id)
+        {
+            Product product = db.Products.Where(x=>x.id == id).FirstOrDefault();
+            if (product == null)
+                return RedirectToAction("Index");
+            return View(product);
+        }
+
 	}
 }
