@@ -52,6 +52,7 @@ namespace shoppingcart.Controllers
                 System.IO.Path.GetExtension(file.FileName);
 
                 var uploadUrl = Server.MapPath("~/images");
+                System.IO.Directory.CreateDirectory(uploadUrl);
                 string path = Path.Combine(uploadUrl, fileName);
                 
                 file.SaveAs(path);
