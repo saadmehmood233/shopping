@@ -62,7 +62,7 @@ namespace shoppingcart.Controllers
             if(user != null)
             {
                 Session["user_id"] = user.id;
-                Session["isAdming"] = user.isAdmin;
+                Session["isAdmin"] = user.isAdmin;
                 Session["username"] = user.name;
                 TempData["message"] = "Successfully Logged in.";
                 return Redirect("/Product/Index");
