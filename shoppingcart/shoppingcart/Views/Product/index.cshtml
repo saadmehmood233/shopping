@@ -12,7 +12,7 @@
             <a href="index?category=All" class="list-group-item">All</a>
             @foreach (var category in Model.categories)
             {
-                <a href="index?category=@category.name" class="list-group-item">@category.name</a>
+                <a href="/Product/index?category=@category.name" class="list-group-item">@category.name</a>
             }
         </div>
     </div>
